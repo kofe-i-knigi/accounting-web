@@ -1,32 +1,43 @@
 import {Component} from 'react';
-import Table from 'material-ui/lib/table/table';
-import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
-import TableRow from 'material-ui/lib/table/table-row';
-import TableHeader from 'material-ui/lib/table/table-header';
-import TableRowColumn from 'material-ui/lib/table/table-row-column';
-import TableBody from 'material-ui/lib/table/table-body';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table';
 
-export default class StoreList extends Component {
+function dataRow(fields) {
+  return (data) => {
+    return (
+      <TableRow key={data.id}>
+        {Object.keys(fields).map(fieldName => {
+          return <TableRowColumn key={fieldName}>{data[fieldName]}</TableRowColumn>;
+        })}
+      </TableRow>
+    );
+  };
+}
 
+export default class DataTable extends Component {
   render() {
-    const {rows} = this.props;
+    const {fields, rows} = this.props;
+    const rowTemplate = dataRow(fields);
 
     return (
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHeaderColumn>ID</TableHeaderColumn>
-            <TableHeaderColumn>Name</TableHeaderColumn>
-            <TableHeaderColumn>Status</TableHeaderColumn>
+            {Object.keys(fields).map(fieldName =>
+              <TableHeaderColumn key="fieldName">
+                {fields[fieldName]}
+              </TableHeaderColumn>
+            )}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map((row, i) => {
-            return <TableRow key={i}>
-              <TableRowColumn>{i}</TableRowColumn>
-              <TableRowColumn>{row.name}</TableRowColumn>
-            </TableRow>;
-          })}
+          {rows.map(row => rowTemplate(row))}
         </TableBody>
       </Table>
     );

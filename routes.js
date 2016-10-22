@@ -1,6 +1,6 @@
 import {Route} from 'react-router';
 import {default as LoginForm} from './components/login-form';
-import App from './components/app';
+import App from './containers/app';
 import StoresList from './containers/stores/list';
 
 export default (

@@ -3,9 +3,9 @@
 import {Component} from 'react';
 import {reduxForm} from 'redux-form';
 
-import RaisedButton from 'material-ui/lib/raised-button';
-import TextField from 'material-ui/lib/text-field';
-import Paper from 'material-ui/lib/paper';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
 
 const style = {
   margin: '20px auto',
